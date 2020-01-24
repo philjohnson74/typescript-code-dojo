@@ -15,3 +15,27 @@ test('set passphrase', () => {
     //assert
     expect(grid.getGrid()).toStrictEqual(elements);
 })
+
+test('getUniqueCharacterList', () => {
+    // arrange
+    const grid = new Grid('playfair example')
+    const expected = 'PLAYFIREXMBCDGHKNOQSTUVWZ'
+
+    // act
+    let actual = grid.getUniqueCharacterList('playfair example')
+
+    // assert
+    expect(actual).toBe(expected)
+})
+
+test('getUniqueCharacterListWithAJ', () => {
+    // arrange
+    const grid = new Grid('jumanji')
+    const expected = 'IUMANBCDEFGHKLOPQRSTVWXYZ'
+
+    // act
+    let actual = grid.getUniqueCharacterList('jumanji')
+
+    // assert
+    expect(actual).toBe(expected)
+})
