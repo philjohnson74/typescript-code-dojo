@@ -1,45 +1,45 @@
 export class Grid {
-    private elements: string[][] = new Array();
+  private elements: string[][] = [];
 
-    constructor(private passphrase: string) {
-        let uniqueLetters = this.getUniqueCharacterList(passphrase)
+  constructor(private passphrase: string) {
+    const uniqueLetters = this.getUniqueCharacterList(passphrase);
 
-        for (let row = 0; row < 5; row++) {
-            let tempArray: string[] = new Array()
-            let headStart = row * 5
+    for (let row = 0; row < 5; row++) {
+      const tempArray: string[] = [];
+      const headStart = row * 5;
 
-            for (let column = 0; column < 5; column++) {
-                tempArray.push(uniqueLetters[headStart + column])
-            }
+      for (let column = 0; column < 5; column++) {
+        tempArray.push(uniqueLetters[headStart + column]);
+      }
 
-            this.elements.push(tempArray)
-        }
+      this.elements.push(tempArray);
     }
+  }
 
-    getUniqueCharacterList(passphrase: string): string {
-        let alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ" = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
-        let allLetters: string = `${passphrase.toUpperCase()}${alphabet}`.replace(/J/g, 'I')
-        const uniqueLetters = allLetters
-            .split('')
-            .filter((x, index, array) => array.indexOf(x) === index)
-            .join('')
-            .replace(' ', '')
- 
-        return uniqueLetters
-    }
+  getUniqueCharacterList(passphrase: string): string {
+    const alphabet: 'ABCDEFGHIKLMNOPQRSTUVWXYZ' = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+    const allLetters: string = `${passphrase.toUpperCase()}${alphabet}`.replace(/J/g, 'I');
+    const uniqueLetters = allLetters
+      .split('')
+      .filter((x, index, array) => array.indexOf(x) === index)
+      .join('')
+      .replace(' ', '');
 
-    getCoordinatesOfLetter(letter: string) {
-        return {
-            x: 2,
-            y: 3
-        };
-    }
+    return uniqueLetters;
+  }
 
-    getLetterAtCoordinates(x: number, y: number) {
-        return 'H';
-    }
+  getCoordinatesOfLetter(letter: string): { x: number; y: number } {
+    return {
+      x: 2,
+      y: 3,
+    };
+  }
 
-    getGrid() {
-        return this.elements;
-    }
+  getLetterAtCoordinates(x: number, y: number): string {
+    return 'H';
+  }
+
+  getGrid(): string[][] {
+    return this.elements;
+  }
 }

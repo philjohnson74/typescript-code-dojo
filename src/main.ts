@@ -1,3 +1,3 @@
-export function encrypt(passphrase: string, textToEncrypt: string) {
-    return "not implemented"
+export function encrypt(passphrase: string, textToEncrypt: string): string {
+  return 'not implemented';
 }
