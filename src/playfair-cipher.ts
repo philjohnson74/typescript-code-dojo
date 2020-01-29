@@ -1,7 +1,7 @@
 export class PlayfairCipher {
-    constructor(private passphrase: string) {}
+  constructor(private passphrase: string) {}
 
-    getPassphrase() {
-        return this.passphrase;
-    }
+  getPassphrase(): string {
+    return this.passphrase;
+  }
 }
