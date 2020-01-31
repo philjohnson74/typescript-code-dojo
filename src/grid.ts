@@ -28,14 +28,14 @@ export class Grid {
     return uniqueLetters;
   }
 
-  getCoordinatesOfLetter(letter: string): { x: number; y: number } {
+  getCoordinatesOfLetter(letter: string): { row: number; column: number } {
     return {
-      x: 2,
-      y: 3,
+      row: 2,
+      column: 3
     };
   }
 
-  getLetterAtCoordinates(x: number, y: number): string {
+  getLetterAtCoordinates(row: number, column: number): string {
     return 'H';
   }
 

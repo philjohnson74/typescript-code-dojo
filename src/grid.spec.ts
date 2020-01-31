@@ -39,3 +39,14 @@ test('getUniqueCharacterListWithAJ', () => {
   // assert
   expect(actual).toBe(expected);
 });
+
+test('getCoordinatesForLetterReturnsCoordinates', () => {
+  const grid = new Grid('playfair example');
+  const letter = 'S';
+  const expected = {
+    row: 3,
+    column: 4
+  };
+
+  expect(grid.getCoordinatesOfLetter(letter)).toEqual(expected);
+});
