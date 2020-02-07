@@ -6,8 +6,23 @@ test('set passphrase', () => {
   expect(cipher.getPassphrase()).toBe('passphrase');
 });
 
-test('encrypt pair', () => {
+test.each([
+  ['HI', 'BM'],
+  ['DE', 'OD'],
+  ['TH', 'ZB'],
+  ['EG', 'XD'],
+  ['OL', 'NA'],
+  ['DI', 'BE'],
+  ['NT', 'KU'],
+  ['HE', 'DM'],
+  ['TR', 'UI'],
+  ['EX', 'XM'],
+  ['ES', 'MO'],
+  ['TU', 'UV'],
+  ['MP', 'IF'],
+  ['YF', 'FP']
+])('encrypt pair', (given, expected) => {
   const cipher = new PlayfairCipher('playfair example');
 
-  expect(cipher.encryptPair('HI')).toBe('BM');
+  expect(cipher.encryptPair(given)).toBe(expected);
 });

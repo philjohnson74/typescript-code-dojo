@@ -29,14 +29,25 @@ export class Grid {
   }
 
   getCoordinatesOfLetter(letter: string): { row: number; column: number } {
+    for (let row = 0; row < 5; row++) {
+      for (let column = 0; column < 5; column++) {
+        if (this.elements[row][column] == letter) {
+          return {
+            row,
+            column
+          };
+        }
+      }
+    }
+
     return {
-      row: 2,
-      column: 3
+      row: 0,
+      column: 0
     };
   }
 
   getLetterAtCoordinates(row: number, column: number): string {
-    return 'H';
+    return this.elements[row][column];
   }
 
   getGrid(): string[][] {

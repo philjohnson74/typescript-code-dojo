@@ -50,3 +50,10 @@ test('getCoordinatesForLetterReturnsCoordinates', () => {
 
   expect(grid.getCoordinatesOfLetter(letter)).toEqual(expected);
 });
+
+test('getLetterAtGivenCoordinates', () => {
+  const grid = new Grid('playfair example');
+  const expected = 'S';
+
+  expect(grid.getLetterAtCoordinates(3, 4)).toEqual(expected);
+});
