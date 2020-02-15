@@ -63,4 +63,25 @@ export class PlayfairCipher {
     // join string and return
     return newStringOne + newStringTwo;
   }
+
+  encryptString(stringToEncrypt: string): string {
+    let retVal = '';
+
+    stringToEncrypt = stringToEncrypt
+      .toUpperCase()
+      .replace(/J/g, 'I')
+      .replace(/ /g, '');
+
+    const pairsToEncrypt: RegExpMatchArray | null = stringToEncrypt.match(/.{1,2}/g);
+
+    if (pairsToEncrypt != null) {
+      for (let i = 0; i < pairsToEncrypt.length; i++) {
+        const pairToEncrypt = pairsToEncrypt[i];
+        const encryptedPair = this.encryptPair(pairToEncrypt);
+        retVal = retVal + encryptedPair;
+      }
+    }
+
+    return retVal;
+  }
 }
