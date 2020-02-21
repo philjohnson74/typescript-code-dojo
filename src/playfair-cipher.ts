@@ -72,6 +72,8 @@ export class PlayfairCipher {
       .replace(/J/g, 'I')
       .replace(/ /g, '');
 
+    stringToEncrypt = this.splitRecurringCharactersInPairs(stringToEncrypt);
+
     const pairsToEncrypt: RegExpMatchArray | null = stringToEncrypt.match(/.{1,2}/g);
 
     if (pairsToEncrypt != null) {
@@ -80,6 +82,45 @@ export class PlayfairCipher {
         const encryptedPair = this.encryptPair(pairToEncrypt);
         retVal = retVal + encryptedPair;
       }
+    }
+
+    return retVal;
+  }
+
+  splitRecurringCharactersInPairs(stringWithRecurringCharacters: string): string {
+    let retVal = stringWithRecurringCharacters;
+
+    const pairsToDedupe: RegExpMatchArray | null = stringWithRecurringCharacters.match(/.{1,2}/g);
+
+    let pairWithRecurringLetters = '';
+
+    if (pairsToDedupe != null) {
+      for (let i = 0; i < pairsToDedupe.length; i++) {
+        const pairToDedupe = pairsToDedupe[i];
+
+        const firstCharacter = pairToDedupe.charAt(0);
+        const secondCharacter = pairToDedupe.charAt(1);
+
+        if (firstCharacter === secondCharacter) {
+          pairWithRecurringLetters = pairToDedupe;
+        }
+      }
+    }
+
+    console.log('pairWithRecurringLetters: ' + pairWithRecurringLetters);
+
+    if (pairWithRecurringLetters.length > 0) {
+      const indexOfRecurringLetters = stringWithRecurringCharacters.indexOf(pairWithRecurringLetters);
+      console.log('indexOfRecurringLetters: ' + indexOfRecurringLetters);
+      const upToAndIncludingFirstCharacter = stringWithRecurringCharacters.substring(0, indexOfRecurringLetters + 1);
+      const fromAndIncludingSecondCharacter = stringWithRecurringCharacters.substring(indexOfRecurringLetters + 1);
+      retVal = `${upToAndIncludingFirstCharacter}X${fromAndIncludingSecondCharacter}`;
+    }
+
+    console.log('retVal: ' + retVal);
+
+    if (retVal.length % 2 > 0) {
+      retVal = `${retVal}X`;
     }
 
     return retVal;
