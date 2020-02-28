@@ -10,3 +10,14 @@ test('should return encrypted string', () => {
   //  Assert
   expect(encryptedResult).toBe(expectedResult);
 });
+
+test('should return encrypted string when two instances of reccuring letter', () => {
+  //  Arrange
+  const expectedResult = 'UIXMXMXMFELAXM';
+
+  //  Act
+  const encryptedResult = encrypt('playfair example', 'tree example');
+
+  //  Assert
+  expect(encryptedResult).toBe(expectedResult);
+});
