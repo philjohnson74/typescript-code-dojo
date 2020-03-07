@@ -133,4 +133,75 @@ export class PlayfairCipher {
 
     return retVal;
   }
+
+  decryptString(stringToDecrypt: string): string {
+    let retVal = '';
+
+    stringToDecrypt = stringToDecrypt.toUpperCase();
+
+    const pairsToDecrypt: RegExpMatchArray | null = stringToDecrypt.match(/.{1,2}/g);
+
+    if (pairsToDecrypt != null) {
+      for (let i = 0; i < pairsToDecrypt.length; i++) {
+        const pairToDecrypt = pairsToDecrypt[i];
+        const decryptedPair = this.decryptPair(pairToDecrypt);
+        retVal = retVal + decryptedPair;
+      }
+    }
+
+    return retVal;
+  }
+
+  decryptPair(pair: string): string {
+    const stringOne = pair[0];
+    const stringTwo = pair[1];
+    let newStringOneCoords = { row: 0, column: 0 };
+    let newStringTwoCoords = { row: 0, column: 0 };
+
+    // Get the grid co-ordinates for both letters
+    const stringOneCoord = this.grid.getCoordinatesOfLetter(stringOne);
+    const stringTwoCoord = this.grid.getCoordinatesOfLetter(stringTwo);
+
+    if (stringOneCoord.column == stringTwoCoord.column) {
+      // Pair of letters in the same column
+      newStringOneCoords = {
+        row: (stringOneCoord.row + 4) % 5,
+        column: stringOneCoord.column
+      };
+
+      newStringTwoCoords = {
+        row: (stringTwoCoord.row + 4) % 5,
+        column: stringTwoCoord.column
+      };
+    } else if (stringOneCoord.row == stringTwoCoord.row) {
+      // Pair of letters in the same row
+      newStringOneCoords = {
+        row: stringOneCoord.row,
+        column: (stringOneCoord.column + 4) % 5
+      };
+
+      newStringTwoCoords = {
+        row: stringTwoCoord.row,
+        column: (stringTwoCoord.column + 4) % 5
+      };
+    } else {
+      // Pair of letters make a rectangle
+      newStringOneCoords = {
+        row: stringOneCoord.row,
+        column: stringTwoCoord.column
+      };
+
+      newStringTwoCoords = {
+        row: stringTwoCoord.row,
+        column: stringOneCoord.column
+      };
+    }
+
+    // find letters for new co-ordinates
+    const newStringOne = this.grid.getLetterAtCoordinates(newStringOneCoords.row, newStringOneCoords.column);
+    const newStringTwo = this.grid.getLetterAtCoordinates(newStringTwoCoords.row, newStringTwoCoords.column);
+
+    // join string and return
+    return newStringOne + newStringTwo;
+  }
 }

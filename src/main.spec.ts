@@ -1,4 +1,5 @@
 import { encrypt } from './main';
+import { decrypt } from './main';
 
 test('should return encrypted string', () => {
   //  Arrange
@@ -20,4 +21,15 @@ test('should return encrypted string when two instances of reccuring letter', ()
 
   //  Assert
   expect(encryptedResult).toBe(expectedResult);
+});
+
+test('should return decrypted string', () => {
+  //  Arrange
+  const expectedResult = 'HidethegoldinthetreXestump'.toUpperCase();
+
+  //  Act
+  const decryptedResult = decrypt('playfair example', 'BMODZBXDNABEKUDMUIXMMOUVIF');
+
+  //  Assert
+  expect(decryptedResult).toBe(expectedResult);
 });
